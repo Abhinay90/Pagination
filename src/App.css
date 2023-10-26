@@ -1,0 +1,59 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+
+
+.main-container{
+  height:100vh;
+  border: 2px red solid;
+  padding:2rem;
+}
+
+
+
+.frame{
+  width: 100%;
+  padding: 1%;
+}
+
+.frame img{
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.frame img:hover{
+  
+  transform:scale(1.05);
+  box-shadow:10px 10px 10px black;
+}
+
+
+.button{
+  list-style: none;
+  padding:0px;
+}
+
+.button button {
+  cursor: pointer;
+  font-size:2em;
+ 
+}
+
+.frame img{
+  aspect-ratio:3/2;
+  margin:0.1rem 0.5rem;
+}
+
+.number{
+ width:50%;
+ text-align: center;
+ border:2px solid grey;
+}
+
+.number p{
+  width:20%;
+  background-color:grey;
+  margin:auto;
+}
