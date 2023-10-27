@@ -2,6 +2,17 @@ import { useState, useContext, useReducer, useEffect } from 'react'
 import Image from './image'
 import { AllImgArrContext, SetCurrentPageContext } from '../App'
 
+
+
+
+
+
+
+
+
+
+
+
 const Frame = ({ setEvent }) => {
 
     console.log("Frame");
@@ -9,6 +20,7 @@ const Frame = ({ setEvent }) => {
     const setCurrentPage = useContext(SetCurrentPageContext);
     const [imgArr, setImgArr] = useState([]);
     const [index, setIndex] = useState({ firstIndex: 0, lastIndex: 6 });
+    const [isLoding, setIsLoding] = useState(true);
 
 
     function setData() {
@@ -48,15 +60,33 @@ const Frame = ({ setEvent }) => {
     useEffect(() => {
         console.log('useEffect');
         setEvent({ nextFrame, preFrame });
-        if (AllImgArr.length)
-            setData()
-       
+        if (AllImgArr.length){
+            setData();
+            setIsLoding(false);
+        }
+
     }, [AllImgArr])
 
     return (
-        <div className="frame row">
-            {imgArr.map((img) => <Image className="border border-danger" {...img} />)}
-        </div>
+        <>
+
+
+            <div className="frame row" >{
+                isLoding ? (
+                    <div className='d-flex align-items-center justify-content-center '>
+                        <div className=' spinner-grow m-5 fw-bold fs-5 text-danger'></div>
+                        <div className=' spinner-grow m-5 fw-bold fs-5 text-danger'></div>
+                        <div className=' spinner-grow m-5 fw-bold fs-5 text-danger'></div>
+                    </div >
+                ) : (
+                    imgArr.map((img) => <Image {...img} />)
+                )
+            }
+            </div>
+
+
+        </>
+
     );
 }
 

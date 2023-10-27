@@ -1,6 +1,5 @@
 import './App.css';
 
-// import '../cssFiles/Pagination.css'
 import { useState, useEffect, createContext } from 'react'
 import Frame from './Components/Frame'
 import axios from 'axios'
@@ -13,7 +12,6 @@ const App = () => {
   const [CframeNumber, setCframeNumbe] = useState(1);
   const [TframeNumber, setTframeNumbe] = useState(0);
   const [props, setProps] = useState({});
-  // const [isLoding, setIsLoding] = useState(true);
 
   async function get_allData() {
     let res = await axios.get('https://picsum.photos/v2/list?page=2&limit=100');
@@ -38,35 +36,50 @@ const App = () => {
 
       <SetCurrentPageContext.Provider value={setCframeNumbe}>
         <div className='container text-center'>
-        
+
           <AllImgArrContext.Provider value={allImgArr} >
             <Frame setEvent={setEvent} />
           </AllImgArrContext.Provider>
-          
+
         </div>
 
         <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
+          className='number-container'
         >
-          <button
-            className="btn btn-danger fa-solid fa-circle-left fs-3 "
-            onClick={props.preFrame}
-          >
-          </button>
+          {
+            CframeNumber !== 1 ? (
+              <button
+                className="btn btn-danger fa-solid fa-circle-left fs-3 "
+                onClick={props.preFrame}
+              >
+              </button>
+            ) : (
+              <button
+                className="btn btn-danger fa-solid fa-circle-left fs-3 disabled"
+              >
+              </button>
+            )
+          }
 
           <span className="number fw-bold fs-5 m-1">
             <p>{CframeNumber} of {TframeNumber}</p>
           </span>
 
-          <button
-            className=" btn btn-danger fs-3 fa-solid fa-circle-right"
-            onClick={props.nextFrame}
-          >
-          </button>
+
+          {
+            CframeNumber === TframeNumber ? (
+              <button
+                className="btn btn-danger fa-solid fa-circle-right fs-3 disabled"
+              >
+              </button>
+            ) : (
+              <button
+                className="btn btn-danger fa-solid fa-circle-right fs-3 "
+                onClick={props.nextFrame}
+              >
+              </button>
+            )
+          }
         </div>
       </SetCurrentPageContext.Provider >
 
@@ -74,7 +87,7 @@ const App = () => {
 
   );
 }
-// export default Pagination;
+
 export { AllImgArrContext, SetCurrentPageContext }
 
 export default App;
